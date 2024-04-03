@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>your-express-project</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <!-- Configure Node.js and Express versions -->
+        <node.version>14.17.1</node.version>
+        <express.version>4.17.1</express.version>
+        <!-- Configure SonarQube properties -->
+        <sonar.host.url>https://sonarqube.p2eppl.com</sonar.host.url>
+        <sonar.login>sonarqube-token</sonar.login>
+        <sonar.projectKey>project-key</sonar.projectKey>
+        <sonar.projectName>Email Gateway</sonar.projectName>
+        <sonar.language>js</sonar.language>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- Node.js and npm configurations -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>npm-install</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-run-build</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- SonarQube scanner configuration -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.0.2155</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
